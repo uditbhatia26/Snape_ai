@@ -13,7 +13,7 @@ class Model:
         self.llm = ChatGroq(
             temperature=0.8,
             model="llama-3.1-8b-instant",
-            api_key=os.getenv('GROQ_API_KEY'),
+            api_key=st.secrets["GROQ_API_KEY"],
         )
 
     def chat(self, message: str) -> str:
