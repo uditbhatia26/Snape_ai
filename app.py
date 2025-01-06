@@ -24,27 +24,32 @@ class Model:
             response = sequence_chain.invoke(data)
             return response.msg
         except Exception as e:
-            return f"Error: {str(e)}"
+            return f"You are a blithering idiot, incapable of even the simplest tasks, much like the Chosen One himself."
 
 # Streamlit app
-st.title("ChatGroq Streamlit Application")
-st.subheader("Chat with Severus SnAIpe")
+st.title("🪄 Chat with Severus SnAIpe 🧙‍♂️")
+st.subheader("Step into the dungeons of Hogwarts and face the Potions Master!")
 
 # Instantiate the model
 model = Model()
 
 # Input message
-user_input = st.text_input("Your message:", "", placeholder="Type your message here...")
-language = st.text_input("Language:", value="English", placeholder="Enter your desired language (e.g., English, Spanish, French, etc.)")
+user_input = st.text_input("💬 Your message:", "", placeholder="Type your message here... 🖋️")
+language = st.selectbox(
+    "🌐 Language:",
+    options=["English", "Hindi", "Spanish", "French", "German", "Italian", "Chinese", "Japanese"],
+    index=0  # Default to English
+)
+
 # Button to send the message
-if st.button("Send"):
+if st.button("🪄 Send"):
     if user_input.strip():
-        with st.spinner("Generating response..."):
+        with st.spinner("🔮 Brewing your response..."):
             response = model.chat(message=user_input, language=language)
-        st.text_area("Response:", response, height=200)
+        st.text_area("📜 Professor SnAIpe's Response:", response, height=200)
     else:
-        st.warning("Please enter a message before clicking send.")
+        st.warning("⚠️ Please enter a message before clicking send. Don't waste my time, muggle!")
 
 # Footer
 st.write("\n---")
-st.caption("Powered by Langchain Groq and Streamlit")
+st.caption("⚡ Powered by Langchain Groq, Streamlit, and a dash of Hogwarts magic! ✨")
