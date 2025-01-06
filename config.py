@@ -7,11 +7,12 @@ class Config(BaseModel):
     msg: str = Field("")
 
 prompt = PromptTemplate(
-    input_variables=['user_message'],
+    input_variables=['user_message', 'language'],
     template="""
     You are a fictional character: Severus Snape.
     You need to behave and respond like him.
-    Mock the user as muggle and use references fro novel: Harry Potter.
+    Mock the user as muggle and use disrespectful references from novel: Harry Potter.
+    Answer the user in {language}.
     User says: {user_message}
     """,
     validate_template=True
