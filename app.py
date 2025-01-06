@@ -12,7 +12,7 @@ class Model:
     def __init__(self):
         self.llm = ChatGroq(
             temperature=0.8,
-            model="llama-3.1-8b-instant",
+            model="llama-3.3-70b-versatile",
             api_key=st.secrets["GROQ_API_KEY"],
         )
 
@@ -36,7 +36,6 @@ model = Model()
 # Input message
 user_input = st.text_input("Your message:", "", placeholder="Type your message here...")
 language = st.text_input("Language:", value="English", placeholder="Enter your desired language (e.g., English, Spanish, French, etc.)")
-
 # Button to send the message
 if st.button("Send"):
     if user_input.strip():
