@@ -16,10 +16,10 @@ class Model:
             api_key=st.secrets["GROQ_API_KEY"],
         )
 
-    def chat(self, message: str) -> str:
+    def chat(self, message: str, language: str) -> str:
         sequence_chain = prompt | self.llm.with_structured_output(Config)
         try:
-            data = {"user_message": message}
+            data = {"user_message": message, "language": language}
             # Running the chain
             response = sequence_chain.invoke(data)
             return response.msg
@@ -35,12 +35,13 @@ model = Model()
 
 # Input message
 user_input = st.text_input("Your message:", "", placeholder="Type your message here...")
+language = st.text_input("Language:", value="English", placeholder="Enter your desired language (e.g., English, Spanish, French, etc.)")
 
 # Button to send the message
 if st.button("Send"):
     if user_input.strip():
         with st.spinner("Generating response..."):
-            response = model.chat(message=user_input)
+            response = model.chat(message=user_input, language=language)
         st.text_area("Response:", response, height=200)
     else:
         st.warning("Please enter a message before clicking send.")
